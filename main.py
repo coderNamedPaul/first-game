@@ -3,9 +3,9 @@ import random
 from collections import Counter
 import generator
 from graph import *
-
 root = mainWindow()
 root.title('казино')
+root.iconbitmap('die.ico')
 windowSize(420, 180)
 canvasSize(1920, 1080)
 
@@ -143,10 +143,9 @@ def oneHandBandit():
     global a
     choice = pg.confirm(title='''*********************ОДНОРУКИЙ БАНДИТ*********************''', text='''
                 правила игры:
-                1.при совпадении двух чисел ставка не списывается
-                2.совпало 3-х2
-                3.совпало 4-х5
-                4.совпало 5-х10
+                1.совпало 2-X2
+                2.совпало 3-х3
+                3.совпало 4-х6
             ''', buttons=['поехали!', 'выйти'])
     if choice == 'выйти':
         return
@@ -190,11 +189,6 @@ def oneHandBandit():
         a = a + w * 6
         pg.alert(title='однорукий бандит', text='ты выиграл')
         pg.alert(title='твой счет', text=a)
-    elif max(h) == 5:
-        a = a + w * 100
-        pg.alert(title='однорукий бандит', text='ты выиграл')
-        pg.alert(title='твой счет', text=a)
-
 def rockPaperScissors():
     global a
     windowSize(420, 180)
