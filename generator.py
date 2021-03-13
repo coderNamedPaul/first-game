@@ -3,16 +3,6 @@ from random import randint
 # первый икс равен 60 каждий следующий +100 y всегда 50
 
 
-def keyboard(event):
-    if event.keycode == 82:
-        brushColor('white')
-        penColor('white')
-        rectangle(0, 0, 320, 180)
-        start()
-    elif event.keycode == VK_ESCAPE:
-        close()
-
-
 def triangle(x, y):
     penSize(3)
     brushColor('green')
