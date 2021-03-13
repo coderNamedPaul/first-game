@@ -1,6 +1,14 @@
 import pyautogui as pg
 import random
 from collections import Counter
+import generator
+from graph import *
+
+root = mainWindow()
+root.title('казино')
+windowSize(420, 180)
+canvasSize(1920, 1080)
+
 a = int(pg.prompt(text='положите деньги на счет', title='банкомат'))
 def menu():
     global a
@@ -69,10 +77,19 @@ def rolet():
 
 def bones():
     global a
+    windowSize(420, 180)
     first = random.randint(1, 6)
     second = random.randint(1, 6)
     summ = first+second
-    pg.alert(title='кости: сумма',text=first + second)
+    brushColor('white')
+    penColor('white')
+    rectangle(0, 0, 1920, 1080)
+    generator.boness(first, second)
+
+    root = mainWindow()
+    root.title('сумма на костях: '+str(summ))
+    windowSize(420, 180)
+    canvasSize(1920, 1080)
     answ = pg.confirm(title='кости', text='выбирай', buttons=['больше', 'меньше', 'равно', 'главное меню'])
     if answ == 'больше':
         answ = 1
@@ -87,7 +104,15 @@ def bones():
     first = random.randint(1, 6)
     second = random.randint(1, 6)
     summ2 = first+second
-    pg.alert(title='кости: сумма 2', text=first + second)
+    brushColor('white')
+    penColor('white')
+    rectangle(0, 0, 1920, 1080)
+    generator.boness(first, second)
+
+    root = mainWindow()
+    root.title('сумма на костях: '+str(summ2))
+    windowSize(420, 180)
+    canvasSize(1920, 1080)
     if answ == 1:
         if summ < summ2:
             pg.alert(text='ты выиграл')
@@ -114,6 +139,7 @@ def bones():
             pg.alert(text=a, title='твой счет')
 
 def oneHandBandit():
+    windowSize(420, 180)
     global a
     choice = pg.confirm(title='''*********************ОДНОРУКИЙ БАНДИТ*********************''', text='''
                 правила игры:
@@ -126,39 +152,52 @@ def oneHandBandit():
         return
     w = int(pg.prompt(text='ставка', title='однорукий бандит', default='100'))
     a -= w
-    slot1 = random.randint(3, 9)
-    slot2 = random.randint(3, 9)
-    slot3 = random.randint(3, 9)
-    slot4 = random.randint(3, 9)
-    slot5 = random.randint(3, 9)
-    pg.alert(title='однорукий бандит: выпало', text=(slot1,slot2,slot3,slot4,slot5))
-    r=[slot1,slot2,slot3,slot4,slot5]
+
+    brushColor('white')
+    penColor('white')
+    rectangle(0, 0, 1920, 1080)
+    slot1 = random.randint(1, 5)
+    slot2 = random.randint(1, 5)
+    slot3 = random.randint(1, 5)
+    slot4 = random.randint(1, 5)
+    generator.choice(slot1, 60)
+    generator.choice(slot2, 160)
+    generator.choice(slot3, 260)
+    generator.choice(slot4, 360)
+
+    root = mainWindow()
+    root.title('однорукий бандит')
+    windowSize(420, 180)
+    canvasSize(1920, 1080)
+
+    r=[slot1,slot2,slot3,slot4]
     t=Counter(r)
     h=[]
-    for i in range(3,10):
+    for i in range(1,5):
         h.append(t[i])
     if max(h) <= 1:
         pg.alert(title='однорукий бандит', text='ты проиграл')
         pg.alert(title='твой счет', text=a)
     elif max(h) == 2:
-        a = a + w
+        a = a + 2*w
         pg.alert(title='однорукий бандит', text='ты выиграл')
         pg.alert(title='твой счет остался прежним', text=a)
     elif max(h) == 3:
-        a = a + w * 2
+        a = a + w * 3
         pg.alert(title='однорукий бандит', text='ты выиграл')
         pg.alert(title='твой счет', text=a)
     elif max(h) == 4:
-        a = a + w * 5
+        a = a + w * 6
         pg.alert(title='однорукий бандит', text='ты выиграл')
         pg.alert(title='твой счет', text=a)
     elif max(h) == 5:
-        a = a + w * 10
+        a = a + w * 100
         pg.alert(title='однорукий бандит', text='ты выиграл')
         pg.alert(title='твой счет', text=a)
 
 def rockPaperScissors():
     global a
+    windowSize(420, 180)
     choice = pg.confirm(title="^^^^^^Камень ножници бумага^^^^^^", buttons=['камень', 'ножници', 'бумага','выход'])
     if choice == 'камень':
         choice = 1
@@ -172,11 +211,32 @@ def rockPaperScissors():
     w = int(pg.prompt(text='ставка'))
     a -= w
     if bot == 1:
-        pg.alert(title='камень ножници бумага', text='бот выкинул камень')
+        brushColor('white')
+        penColor('white')
+        rectangle(0, 0, 1920, 1080)
+        image(0, 0, 'stone.jpg', anchor=NW)
+        root = mainWindow()
+        root.title('камень')
+        windowSize(420, 180)
+        canvasSize(1920, 1080)
     elif bot == 2:
-        pg.alert(title='камень ножници бумага', text='бот выкинул ножници')
+        brushColor('white')
+        penColor('white')
+        rectangle(0, 0, 1920, 1080)
+        image(0, 0, 'scissors.png', anchor=NW)
+        root = mainWindow()
+        root.title('ножници')
+        windowSize(420, 180)
+        canvasSize(1920, 1080)
     elif bot == 3:
-        pg.alert(title='камень ножници бумага', text='бот выкинул бумагу')
+        brushColor('white')
+        penColor('white')
+        rectangle(0, 0, 1920, 1080)
+        image(0, 0, 'paper.jpg', anchor=NW)
+        root = mainWindow()
+        root.title('бумага')
+        windowSize(420, 180)
+        canvasSize(1920, 1080)
     if choice == 1 and bot == 1:
         pg.alert(title='камень ножници бумага', text="ничия, твой счет прежний")
         a += w
