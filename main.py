@@ -23,49 +23,52 @@ def menu():
 
 def rolet():
     global a
+    root.title('рулетка')
+    w = int(pg.prompt(text='твоя ставка'))
     c = pg.confirm(text="""
     ------------------------------------------
     РУЛЕТКА
     ------------------------------------------
     ставлю на...""", title='рулетка', buttons=['четное', 'нечетное', 'дюжина', 'свое число', 'выход'])
+    e = random.randint(1, 36)
+    brushColor('white')
+    penColor('white')
+    rectangle(0, 0, 1920, 1080)
+    generator.roulet(e)
+    windowSize(420, 400)
+    canvasSize(1920, 1080)
     if c == 'выход':
         return
     if c == 'четное':
-        w = int(pg.prompt(text='твоя ставка'))
-        e = random.randint(1, 36)
+        a = a - w
         if e % 2 == 0:
+            a = a + w * 2
             pg.alert(text='ты выиграл')
             pg.alert(text=a, title='твой счет')
         else:
-            a = a - w
             pg.alert(text='ты проиграл')
             pg.alert(text=a, title='твой счет')
     if c == 'нечетное':
-        w = int(pg.prompt(text='твоя ставка'))
-        e = random.randint(1, 36)
+        a = a - w
         if e % 2 == 1:
+            a = a + w * 2
             pg.alert(text='ты выиграл')
             pg.alert(text=a, title='твой счет')
         else:
-            a = a - w
             pg.alert(text='ты проиграл')
             pg.alert(text=a, title='твой счет')
     if c == 'дюжина':
-        w = int(pg.prompt(text='твоя ставка'))
         a = a - w
-        e = random.randint(1, 36)
         if e % 12 == 0:
-            a = a + 3 * w
+            a = a + 6 * w
             pg.alert(text='ты выиграл')
             pg.alert(text=a, title='твой счет')
         else:
             pg.alert(text='ты проиграл')
             pg.alert(text=a, title='твой счет')
     if c == 'свое число':
-        w = int(pg.prompt(text='твоя ставка'))
         r = int(pg.prompt(text='твое число(от 1 до 36):'))
         a = a - w
-        e = random.randint(1, 36)
         if e == r:
             a = a + 36 * w
             pg.alert(text='ты выиграл')
@@ -75,9 +78,10 @@ def rolet():
             pg.alert(text=a, title='твой счет')
     pg.alert(title='выпало', text=e)
 
+
 def bones():
     global a
-    windowSize(420, 180)
+    windowSize(420, 400)
     first = random.randint(1, 6)
     second = random.randint(1, 6)
     summ = first+second
@@ -100,7 +104,7 @@ def bones():
     else:
         return
     w = int(pg.prompt(text='ставка'))
-    a  -= w
+    a -= w
     first = random.randint(1, 6)
     second = random.randint(1, 6)
     summ2 = first+second
@@ -139,7 +143,7 @@ def bones():
             pg.alert(text=a, title='твой счет')
 
 def oneHandBandit():
-    windowSize(420, 180)
+    windowSize(420, 400)
     global a
     choice = pg.confirm(title='''*********************ОДНОРУКИЙ БАНДИТ*********************''', text='''
                 правила игры:
@@ -191,7 +195,7 @@ def oneHandBandit():
         pg.alert(title='твой счет', text=a)
 def rockPaperScissors():
     global a
-    windowSize(420, 180)
+    windowSize(420, 400)
     choice = pg.confirm(title="^^^^^^Камень ножници бумага^^^^^^", buttons=['камень', 'ножници', 'бумага','выход'])
     if choice == 'камень':
         choice = 1
