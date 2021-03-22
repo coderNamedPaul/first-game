@@ -51,20 +51,6 @@ def choice(figure, x):
     elif figure == 5:
         circle2(x, y)
 
-def generate(figure1, figure2, figure3, figure4):
-    choice(figure1, 60)
-    choice(figure2, 160)
-    choice(figure3, 260)
-    choice(figure4, 360)
-
-    root = mainWindow()
-    root.title('figure generator')
-    windowSize(420, 180)
-    canvasSize(1920, 1080)
-
-
-    run()
-
 def boness(value1, value2):
     penColor('black')
     penSize(6)
@@ -126,3 +112,72 @@ def boness(value1, value2):
         circle(250, 115, 10)
         circle(250, 80, 10)
         circle(250, 45, 10)
+
+def roulet(value):
+    x =185
+    y =65
+    brushColor('yellow')
+    penColor('yellow')
+    polygon([(210, 125), (180, 175), (240, 175), (210, 125)])
+    if value % 2 == 0 and value % 12 != 0:
+        brushColor('red')
+        penColor('red')
+        rectangle(x, y, x+50, y+50)
+        rectangle(x-120, y, x-70, y+50)
+        rectangle(x+120, y, x+170, y+50)
+        penColor('black')
+        brushColor('black')
+        rectangle(x-180, y, x-130, y+50)
+        rectangle(x-60, y, x-10, y+50)
+        rectangle(x+60, y, x+110, y+50)
+        rectangle(x+180, y, x+230, y+50)
+        penColor('green')
+        brushColor('green')
+        kolhos = randint(1, 5)
+        if kolhos == 1:
+            rectangle(x - 120, y, x - 70, y + 50)
+        elif kolhos == 2:
+            rectangle(x + 120, y, x + 170, y + 50)
+        else:
+            pass
+    elif value % 2 == 1:
+        penColor('black')
+        brushColor('black')
+        rectangle(x, y, x + 50, y + 50)
+        rectangle(x - 120, y, x - 70, y + 50)
+        rectangle(x + 120, y, x + 170, y + 50)
+
+        brushColor('red')
+        penColor('red')
+        rectangle(x - 180, y, x - 130, y + 50)
+        rectangle(x - 60, y, x - 10, y + 50)
+        rectangle(x + 60, y, x + 110, y + 50)
+        rectangle(x + 180, y, x + 230, y + 50)
+
+        penColor('green')
+        brushColor('green')
+        kolhos = randint(1, 6)
+        if kolhos == 1:
+            rectangle(x - 180, y, x - 130, y + 50)
+        elif kolhos == 2:
+            rectangle(x - 60, y, x - 10, y + 50)
+        elif kolhos == 3:
+            rectangle(x + 60, y, x + 110, y + 50)
+        elif kolhos == 4:
+            rectangle(x + 180, y, x + 230, y + 50)
+        else:
+            pass
+    elif value % 12 == 0:
+        brushColor('red')
+        penColor('red')
+        rectangle(x - 120, y, x - 70, y + 50)
+        rectangle(x + 120, y, x + 170, y + 50)
+        penColor('black')
+        brushColor('black')
+        rectangle(x - 180, y, x - 130, y + 50)
+        rectangle(x - 60, y, x - 10, y + 50)
+        rectangle(x + 60, y, x + 110, y + 50)
+        rectangle(x + 180, y, x + 230, y + 50)
+        brushColor('green')
+        penColor('green')
+        rectangle(x, y, x + 50, y + 50)
